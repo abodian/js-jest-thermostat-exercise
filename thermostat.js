@@ -41,6 +41,16 @@ class Thermostat {
     this.currentTemperature = 20;
     this.powerSavingMode = true;
   }
+
+  currentEnergyUsage() {
+    if (this.currentTemperature < 18) {
+      return "low-usage";
+    } else if (this.currentTemperature >= 18 && this.currentTemperature <= 25) {
+      return "medium-usage";
+    } else {
+      return "high-usage";
+    }
+  }
 }
 
 module.exports = Thermostat;

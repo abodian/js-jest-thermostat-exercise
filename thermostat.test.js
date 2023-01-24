@@ -65,4 +65,32 @@ describe("Thermostat class", () => {
     }
     expect(thermostat.getTemperature()).toBe(10);
   });
+
+  it("returns current energy usage as low-usage", () => {
+    thermostat.reset();
+    for (let i = 0; i < 3; i++) {
+      thermostat.down();
+    }
+    expect(thermostat.getTemperature()).toBe(17);
+    expect(thermostat.currentEnergyUsage()).toBe("low-usage");
+  });
+
+  it("returns current energy usage as medium-usage", () => {
+    thermostat.reset();
+    for (let i = 0; i < 5; i++) {
+      thermostat.up();
+    }
+    expect(thermostat.getTemperature()).toBe(25);
+    expect(thermostat.currentEnergyUsage()).toBe("medium-usage");
+  });
+
+  it("returns current energy usage as high-usage", () => {
+    thermostat.reset();
+    thermostat.setPowerSavingMode(false);
+    for (let i = 0; i < 6; i++) {
+      thermostat.up();
+    }
+    expect(thermostat.getTemperature()).toBe(26);
+    expect(thermostat.currentEnergyUsage()).toBe("high-usage");
+  });
 });
